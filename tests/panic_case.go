@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/wazsmwazsm/mortar"
+	"conorder"
 )
 
 func main() {
@@ -14,19 +14,19 @@ func case1() {
 	fmt.Println("--- case1 start ---")
 	defer fmt.Println("--- case1 stoped ---")
 
-	pool, err := mortar.NewPool(1)
+	pool, err := conorder.NewPool(1)
 	if err != nil {
 		panic(err)
 	}
 
-	pool.Put(&mortar.Task{
+	pool.Put(&conorder.Task{
 		Handler: func(v ...interface{}) {
 			panic("aaaaaa!")
 		},
 		Params: []interface{}{"hi!"},
 	})
 
-	pool.Put(&mortar.Task{
+	pool.Put(&conorder.Task{
 		Handler: func(v ...interface{}) {
 			fmt.Println(v)
 		},
@@ -34,7 +34,7 @@ func case1() {
 	})
 
 	pool.Close()
-	err = pool.Put(&mortar.Task{
+	err = pool.Put(&conorder.Task{
 		Handler: func(v ...interface{}) {},
 	})
 	if err != nil {

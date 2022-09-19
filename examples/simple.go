@@ -4,12 +4,14 @@ import (
 	"fmt"
 	"sync"
 
+	"conorder"
+
 	"github.com/wazsmwazsm/mortar"
 )
 
 func main() {
 	// 创建容量为 10 的任务池
-	pool, err := mortar.NewPool(10)
+	pool, err := conorder.NewPool(10)
 	if err != nil {
 		panic(err)
 	}
@@ -19,7 +21,7 @@ func main() {
 	for i := 0; i < 1000; i++ {
 		wg.Add(1)
 		// 创建任务
-		task := &mortar.Task{
+		task := &conorder.Task{
 			Handler: func(v ...interface{}) {
 				wg.Done()
 				fmt.Println(v)
@@ -33,7 +35,7 @@ func main() {
 
 	wg.Add(1)
 	// 再创建一个任务
-	pool.Put(&mortar.Task{
+	pool.Put(&conorder.Task{
 		Handler: func(v ...interface{}) {
 			wg.Done()
 			fmt.Println(v)

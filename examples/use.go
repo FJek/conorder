@@ -4,17 +4,17 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/wazsmwazsm/mortar"
+	"conorder"
 )
 
 func main() {
-	pool, err := mortar.NewPool(10)
+	pool, err := conorder.NewPool(10)
 	if err != nil {
 		panic(err)
 	}
 
 	for i := 0; i < 20; i++ {
-		pool.Put(&mortar.Task{
+		pool.Put(&conorder.Task{
 			Handler: func(v ...interface{}) {
 				fmt.Println(v)
 			},

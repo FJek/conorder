@@ -1,4 +1,4 @@
-package mortar
+package conorder
 
 import (
 	"errors"
@@ -30,7 +30,7 @@ type Task struct {
 
 // Pool task pool
 type Pool struct {
-	capacity       uint64
+	capacity       uint64 // 并发度
 	runningWorkers uint64
 	status         int64
 	chTask         chan *Task
